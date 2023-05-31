@@ -172,8 +172,8 @@ elif z== 'Reubicar':
 			del elementos [-1]
 			paginas=elementos
 		else:
-			pos=0					
-			objetivo=elementos[-1]	
+			pos=0
+			objetivo=elementos[-1]
 			del elementos [-1]
 			paginas=elementos
 		recorte(objetivo) #este es el objetivo (prefijo)
