@@ -66,7 +66,7 @@ z =  pymsgbox.confirm(text='¿Que desea Hacer?', title='Edicion de Documentos', 
 if z == "Fragmentar":
 	a=pymsgbox.prompt('Ingresa expediente, claves y posiciónes, o claves y páginas:',title='Fragmentar Expediente',default='####,ClavePos,Clave,Pag-Pag,Pag,ClavePos...')
 	try:
-		#DEFINIR VARIABLES
+		#DEFINIR LAS VARIABLES
 		variables(a)
 		elem=[]
 		modulo=[]
