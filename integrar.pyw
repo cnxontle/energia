@@ -25,23 +25,22 @@ try:
 	celdas2 = hoja['A1':'A10000']
 	num = []
 	rpu = []
+
+	#esta fila se va a agregar a la lista num
 	for fila in celdas:
-		for celda in fila:
-			if celda.value != None:
-				x = celda.value
-				x = str(x)
-				if len(x) == 2:
-					x = "00" + x
-				elif len(x) == 1:
-					x = "000" + x
-				elif len(x) == 3:
-					x = "0" + x
-				num.append(x)
+		if fila[0].value != None:
+			x = str(fila[0].value)
+			if len(x) < 4:
+				x = '0' * (4 - len(x)) + x
+			num.append(x)
+		else:
 			break
+
+	#esta fila se va a agregar a la lista rpu
 	for fila in celdas2:
-		for celda in fila:
-			if celda.value != None:
-				rpu.append(celda.value)
+		if fila[0].value != None:
+			rpu.append(fila[0].value)
+		else:
 			break
 except:
 	pass
