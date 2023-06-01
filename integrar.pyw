@@ -25,6 +25,7 @@ try:
 	celdas2 = hoja['A1':'A10000']
 	num = []
 	rpu = []
+
 	#esta fila se va a agregar a la lista num
 	for fila in celdas:
 		if fila[0].value != None:
@@ -34,6 +35,7 @@ try:
 			num.append(x)
 		else:
 			break
+
 	#esta fila se va a agregar a la lista rpu
 	for fila in celdas2:
 		if fila[0].value != None:
@@ -55,28 +57,35 @@ for item in lista_prefijos:
 p = 0
 fusionador = PdfFileMerger()
 for pdf in sorted(pdfs_hijo):
-	
-	if pdf.startswith(lista_prefijos[1]):
+	try:
+		prefijo_adelantado=lista_prefijos[1]
+	except:
+		prefijo_adelantado="$$$$"
+
+	if pdf.startswith(prefijo_adelantado):
 		lista_prefijos.pop(0)
 		read_pdf = PdfFileReader(pdf)
 		num_pages = read_pdf.getNumPages()
 		fusionador.append(pdf)
+			
 		#se extrae el indice de el archivo y se convierte al nombre de la etiqueta dentro del pdf
 		titulo = str(pdf[4])
 		try:
-			titulo_nombre = nombres_titulos[titulos.index(titulo)]
+			titulo_nombre = nombres_titulos[titulos.index(titulo)]  # try
 		except:
 			titulo_nombre = titulo
 		fusionador.addBookmark(titulo_nombre, p)
 		p = p + num_pages
 	else:
+		lista_prefijos.pop(0)
 		read_pdf = PdfFileReader(pdf)
 		num_pages = read_pdf.getNumPages()
 		fusionador.append(pdf)
+			
 		#se extrae el indice de el archivo y se convierte al nombre de la etiqueta dentro del pdf
 		titulo = str(pdf[4])
 		try:
-			titulo_nombre = nombres_titulos[titulos.index(titulo)]
+			titulo_nombre = nombres_titulos[titulos.index(titulo)]  # try
 		except:
 			titulo_nombre = titulo
 		fusionador.addBookmark(titulo_nombre, p)
@@ -85,15 +94,17 @@ for pdf in sorted(pdfs_hijo):
 			nombre = rpu[num.index(pdf[:4])]
 		except:
 			nombre = pdf[:4]
+				
 		#renombramos y escribimos el archivo anterior
 		nombre_archivo_salida = RutaExp + str(nombre) + ".pdf"
 		p = 0
 		with open(nombre_archivo_salida, 'wb') as salida:
 			fusionador.write(salida)
-		
+
 		#reiniciamos el fusionador
 		fusionador.close()
 		fusionador = PdfFileMerger()
+	
 
 fusionador.close()
 pymsgbox.alert("Procedimiento Completado!",title='Integrar Expedientes')
