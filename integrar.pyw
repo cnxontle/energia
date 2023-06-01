@@ -2,6 +2,8 @@ from PyPDF2 import PdfFileMerger, PdfFileReader
 import openpyxl
 import pymsgbox
 import os
+import tkinter as tk
+from tkinter import ttk
 
 # PARAMETROS
 RutaExp = __file__.rstrip("integrar.pyw") + "Validacion\\Archivo\\Expedientes\\"
@@ -36,7 +38,6 @@ try:
 	celdas2 = hoja['A1':'A10000']
 	num = []
 	rpu = []
-
 	#esta fila se va a agregar a la lista num
 	for fila in celdas:
 		if fila[0].value != None:
@@ -46,7 +47,6 @@ try:
 			num.append(x)
 		else:
 			break
-
 	#esta fila se va a agregar a la lista rpu
 	for fila in celdas2:
 		if fila[0].value != None:
@@ -60,6 +60,16 @@ except:
 for pdf in pdfs_hijo:
 	prefijo = pdf[0:4]
 	lista_prefijos.append(str(prefijo))
+
+# CONFIGURAR BARRA DE PROGRESO
+ventana = tk.Tk()
+ventana.title("Integrando expedientes...")
+ventana.geometry("310x110")
+barra_progreso = ttk.Progressbar(ventana, length=280)
+barra_progreso.pack(pady=20)
+barra_progreso.configure(mode="determinate", maximum=len(lista_prefijos))
+etiqueta_mensaje = tk.Label(ventana, text="Para cancelar el proceso, cierra la ventana...      \n\n", font=("Arial", 10), anchor="w")
+etiqueta_mensaje.pack()
 
 # CONSOLIDAR ARCHIVOS
 for pdf in sorted(pdfs_hijo):
@@ -83,10 +93,20 @@ for pdf in sorted(pdfs_hijo):
 		p = 0
 		with open(nombre_archivo_salida, 'wb') as salida:
 			fusionador.write(salida)
-
 		#reiniciamos el fusionador
 		fusionador.close()
 		fusionador = PdfFileMerger()
-	
+	try:
+		barra_progreso['value'] += 1
+	except:
+		break
+	ventana.update()
+
+# Cerrar la ventana después de que se complete el proceso
 fusionador.close()
-pymsgbox.alert("Procedimiento Completado!",title='Integrar Expedientes')
+try:
+	ventana.destroy()
+	pymsgbox.alert("Procedimiento Completado!",title='Integrar Expedientes')
+except:
+	pass
+ventana.mainloop()
