@@ -9,12 +9,24 @@ RutaHijo = __file__.rstrip("integrar.pyw") + "Validacion\\Archivo\\"
 pdfs_hijo = [archivo for archivo in os.listdir(RutaHijo) if archivo.endswith(".pdf")]
 RutaMadre = __file__.rstrip("integrar.pyw")
 os.chdir(RutaHijo)
+p = 0
 lista_prefijos = []
 FilePath = RutaMadre + "CUOTA ENERGETICA.xlsm"
 fusionador = PdfFileMerger()
 titulos = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "x"]
 nombres_titulos = ["Actualizacion", "Biometricos", "PEUA", "Verificacion", "Identificacion", "CURP", "RFC",
 				   "Recibo CFE", "Facturas", "Titulo CNA", "Acta Constututiva", "Carta Poder", "Escrituras", "Croquis"]
+
+#FUNCION PARA EXTRAER titulos Y REEMPAZAR POR nombre_titulos
+def agregar_bookmark(fusionador, pdf, p, num_pages, titulos, nombres_titulos):
+    titulo = str(pdf[4])
+    try:
+        titulo_nombre = nombres_titulos[titulos.index(titulo)]
+    except:
+        titulo_nombre = titulo
+    fusionador.addBookmark(titulo_nombre, p)
+    p = p + num_pages
+    return p
 
 # LEER DATOS DE EXCEL
 try:
@@ -50,46 +62,23 @@ for pdf in pdfs_hijo:
 	lista_prefijos.append(str(prefijo))
 
 # CONSOLIDAR ARCHIVOS
-p = 0
 for pdf in sorted(pdfs_hijo):
 	try:
 		prefijo_adelantado=lista_prefijos[1]
 	except:
 		prefijo_adelantado="$$$$"
-	if pdf.startswith(prefijo_adelantado):
-		lista_prefijos.pop(0)
-		read_pdf = PdfFileReader(pdf)
-		num_pages = read_pdf.getNumPages()
-		fusionador.append(pdf)
-			
-		#se extrae el indice de el archivo y se convierte al nombre de la etiqueta dentro del pdf
-		titulo = str(pdf[4])
-		try:
-			titulo_nombre = nombres_titulos[titulos.index(titulo)]  # try
-		except:
-			titulo_nombre = titulo
-		fusionador.addBookmark(titulo_nombre, p)
-		p = p + num_pages
-	else:
-		lista_prefijos.pop(0)
-		read_pdf = PdfFileReader(pdf)
-		num_pages = read_pdf.getNumPages()
-		fusionador.append(pdf)
-			
-		#se extrae el indice de el archivo y se convierte al nombre de la etiqueta dentro del pdf
-		titulo = str(pdf[4])
-		try:
-			titulo_nombre = nombres_titulos[titulos.index(titulo)]  # try
-		except:
-			titulo_nombre = titulo
-		fusionador.addBookmark(titulo_nombre, p)
-		p = p + num_pages
+	lista_prefijos.pop(0)
+	read_pdf = PdfFileReader(pdf)
+	num_pages = read_pdf.getNumPages()
+	fusionador.append(pdf)
+	p = agregar_bookmark(fusionador, pdf, p, num_pages, titulos, nombres_titulos)
+	
+	#renombramos y escribimos el archivo
+	if not pdf.startswith(prefijo_adelantado):
 		try:
 			nombre = rpu[num.index(pdf[:4])]
 		except:
 			nombre = pdf[:4]
-				
-		#renombramos y escribimos el archivo anterior
 		nombre_archivo_salida = RutaExp + str(nombre) + ".pdf"
 		p = 0
 		with open(nombre_archivo_salida, 'wb') as salida:
