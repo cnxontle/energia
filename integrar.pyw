@@ -10,7 +10,6 @@ pdfs_hijo = [archivo for archivo in os.listdir(RutaHijo) if archivo.endswith(".p
 RutaMadre = __file__.rstrip("integrar.pyw")
 os.chdir(RutaHijo)
 lista_prefijos = []
-lista_hijo = []
 FilePath = RutaMadre + "CUOTA ENERGETICA.xlsm"
 fusionador = PdfFileMerger()
 titulos = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "x"]
@@ -45,23 +44,18 @@ try:
 except:
 	pass
 
-# Lista hijo
+# Lista prefijos
 for pdf in pdfs_hijo:
 	prefijo = pdf[0:4]
 	lista_prefijos.append(str(prefijo))
-for item in lista_prefijos:
-	if item not in lista_hijo:
-		lista_hijo.append(item)
 
 # CONSOLIDAR ARCHIVOS
 p = 0
-fusionador = PdfFileMerger()
 for pdf in sorted(pdfs_hijo):
 	try:
 		prefijo_adelantado=lista_prefijos[1]
 	except:
 		prefijo_adelantado="$$$$"
-
 	if pdf.startswith(prefijo_adelantado):
 		lista_prefijos.pop(0)
 		read_pdf = PdfFileReader(pdf)
@@ -105,6 +99,5 @@ for pdf in sorted(pdfs_hijo):
 		fusionador.close()
 		fusionador = PdfFileMerger()
 	
-
 fusionador.close()
 pymsgbox.alert("Procedimiento Completado!",title='Integrar Expedientes')
