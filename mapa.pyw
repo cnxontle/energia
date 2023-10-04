@@ -1,6 +1,7 @@
 import simplekml
 import pandas as pd
 import re
+import os
 
 def dms_to_decimal(dms):
     # Manejar valores vacíos o nulos
@@ -29,7 +30,11 @@ def dms_to_decimal(dms):
     return decimal
 
 # Cargar el archivo Excel
-excel_file = 'CUOTA ENERGETICA.xlsm'
+RutaMadre = __file__.rstrip("mapa.pyw")
+os.chdir(RutaMadre)
+excel_file = RutaMadre + "CUOTA ENERGETICA.xlsm"
+
+
 df = pd.read_excel(excel_file)
 
 # Buscar la columna "ESTATUS"
