@@ -3,7 +3,7 @@
 Este proyecto requiere la instalación de varias bibliotecas de Python y algunas configuraciones específicas para habilitar los macros en Excel y eliminar los mensajes de advertencia en los vínculos. Sigue estos pasos para configurar el proyecto correctamente.
 
 
-## 1. Instalación de Bibliotecas
+## Instalación de Bibliotecas
 
 Asegúrate de tener las siguientes bibliotecas instaladas en su entorno de Python. Puedes instalarlas utilizando pip:
 
@@ -21,16 +21,18 @@ pip install openpyxl
 pip install simplekml
 
 pip install pandas
+
+pip install xlrd --upgrade
 ```
 
 
-## 2. Habilitar Macros
+## Habilitar Macros
 
 
 Para habilitar los macros en Excel, agrega la carpeta del proyecto a las "Ubicaciones de Confianza" dentro de las opciones de Excel.
 
 
-## 3. Eliminar Mensajes de Advertencia en Vínculos
+## Eliminar Mensajes de Advertencia en Vínculos
 
 Para eliminar los mensajes de advertencia en los vínculos, sigue estos pasos:
 
@@ -46,7 +48,7 @@ e. Haz clic derecho en el valor recién creado y selecciona la opción "Modifica
 
 
 
-## 4. Verificar los Botones en el Documento de Excel
+## Verificar los Botones en el Documento de Excel
 
 Si los botones en el documento de Excel aún no funcionan después de realizar las configuraciones anteriores intenta lo siguiente:
 
