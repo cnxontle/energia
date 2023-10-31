@@ -1,4 +1,4 @@
-# Guia de Configucación
+# Guia de Configuración
 
 Este proyecto requiere la instalación de varias bibliotecas de Python. Sigue estos pasos para configurar el proyecto correctamente.
 
