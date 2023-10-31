@@ -5,7 +5,7 @@ Este proyecto requiere la instalación de varias bibliotecas de Python. Sigue es
 
 ## Instalación de Bibliotecas
 
-Asegúrate de tener las siguientes bibliotecas instaladas en su entorno de Python. Puedes instalarlas utilizando pip:
+Asegúrate de tener las siguientes bibliotecas instaladas en tu entorno de Python. Puedes instalarlas utilizando pip:
 
 ```bash
 pip install PyPDF2==1.26.0
