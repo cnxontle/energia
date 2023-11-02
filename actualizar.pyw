@@ -4,6 +4,31 @@ import requests
 import openpyxl
 import pandas as pd
 import xlwings as xw
+import psutil
+import win32com.client
+
+def is_excel_open(file_path):
+    file_name = os.path.basename(file_path).lower()
+    for process in psutil.process_iter(attrs=['pid', 'name']):
+        try:
+            if 'excel' in process.info['name'].lower():
+                for window in process.open_files():
+                    if file_name in window.path.lower():
+                        return True
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
+    return False
+
+def save_and_close_excel(file_path):
+    try:
+        excel = win32com.client.Dispatch("Excel.Application")
+        excel.Visible = False
+        workbook = excel.Workbooks.Open(file_path)
+        workbook.Save()
+        workbook.Close()
+        excel.Quit()
+    except Exception as e:
+        print(f"Error al guardar y cerrar Excel: {str(e)}")
 
 def descargar_y_descomprimir_zip(url_zip, destino):
     response = requests.get(url_zip)
@@ -28,10 +53,12 @@ def actualizar_excel(filename,nombre,min):
     df = pd.DataFrame(contenido_columnas)
     return df
 
-
 # Obtener el directorio del script
 script_dir = os.path.dirname(os.path.abspath(__file__))
 archivo_xlsm = os.path.join(script_dir, 'CUOTA ENERGETICA.xlsm')
+
+if is_excel_open(archivo_xlsm):
+    save_and_close_excel(archivo_xlsm)
 
 # # obtener el contenido de excel
 contenido_del_dataframe = actualizar_excel(archivo_xlsm,"DATOS",2)
@@ -57,6 +84,3 @@ sheet2.range('a1').value = contenido_del_dataframe2.values
 # Guarda los cambios en el archivo
 wb.save()
 wb.close()
-
-
-  
