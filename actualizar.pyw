@@ -4,34 +4,9 @@ import requests
 import openpyxl
 import pandas as pd
 import xlwings as xw
-import psutil
-import win32com.client
+from time import sleep
 
-# Verificar si el excel esta abierto
-def is_excel_open(file_path):
-    file_name = os.path.basename(file_path).lower()
-    for process in psutil.process_iter(attrs=['pid', 'name']):
-        try:
-            if 'excel' in process.info['name'].lower():
-                for window in process.open_files():
-                    if file_name in window.path.lower():
-                        return True
-        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-            pass
-    return False
-
-# Cerrar el excel y guardar cambios
-def save_and_close_excel(file_path):
-    try:
-        excel = win32com.client.Dispatch("Excel.Application")
-        excel.Visible = False
-        workbook = excel.Workbooks.Open(file_path)
-        workbook.Save()
-        workbook.Close()
-        excel.Quit()
-    except Exception as e:
-        print(f"Error al guardar y cerrar Excel: {str(e)}")
-
+sleep (3)
 # Actualizar repositorio local omitiendo archivos de configuracion
 def descargar_y_descomprimir_zip(url_zip, destino):
     response = requests.get(url_zip)
@@ -63,8 +38,6 @@ def actualizar_excel(filename,nombre,min):
 script_dir = os.path.dirname(os.path.abspath(__file__))
 archivo_xlsm = os.path.join(script_dir, 'CUOTA ENERGETICA.xlsm')
 
-if is_excel_open(archivo_xlsm):
-    save_and_close_excel(archivo_xlsm)
 
 # Obtener datos de excel
 contenido_del_dataframe = actualizar_excel(archivo_xlsm,"DATOS",2)
