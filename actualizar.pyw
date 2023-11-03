@@ -83,4 +83,3 @@ sheet2.range('a1').value = contenido_del_dataframe2.values
 
 # Guarda los cambios en el archivo
 wb.save()
-wb.close()
