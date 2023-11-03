@@ -48,7 +48,8 @@ contenido_del_dataframe2 = actualizar_excel(archivo_xlsm,"bombas",1)
 url_zip = "https://github.com/cnxontle/energia/archive/main.zip"
 script_dir = os.path.dirname(os.path.abspath(__file__))
 destino = os.path.abspath(os.path.join(script_dir, os.pardir))
-descargar_y_descomprimir_zip(url_zip, destino)
+destino2 = os.path.abspath(os.path.join(destino, os.pardir))
+descargar_y_descomprimir_zip(url_zip, destino2)
 
 # Modificar el nuevo excel
 wb = xw.Book(archivo_xlsm)

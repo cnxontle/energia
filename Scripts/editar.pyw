@@ -5,10 +5,12 @@ import os
 import pymsgbox
 
 # PARAMETROS
-RutaRespaldo=__file__.rstrip("editar.pyw")+"Validacion\\Respaldo\\"
-RutaMadre=__file__.rstrip("editar.pyw")+"Validacion\\Archivo\\"
-RutaTemp= __file__.rstrip("editar.pyw")+"Validacion\\Temp\\"
-RutaExp=__file__.rstrip("editar.pyw")+"Validacion\\Archivo\\Expedientes\\"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+destino = os.path.abspath(os.path.join(script_dir, os.pardir))
+RutaRespaldo= destino + "\\Validacion\\Respaldo\\"
+RutaMadre= destino + "\\Validacion\\Archivo\\"
+RutaTemp= destino + "\\Validacion\\Temp\\"
+RutaExp= destino + "\\Validacion\\Archivo\\Expedientes\\"
 elementos=[]
 documento=("")
 prefijo=0

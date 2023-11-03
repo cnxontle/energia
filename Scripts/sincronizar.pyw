@@ -4,11 +4,13 @@ import os
 import pymsgbox
 
 # PARAMETROS
-RutaMadre=__file__.rstrip("sincronizar.pyw")+"Validacion\\Archivo\\"
-RutaTemp= __file__.rstrip("sincronizar.pyw")+"Validacion\\Temp\\"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+destino = os.path.abspath(os.path.join(script_dir, os.pardir))
+RutaMadre= destino + "\\Validacion\\Archivo\\"
+RutaTemp= destino + "\\Validacion\\Temp\\"
 RutaMadre2="Validacion\\Archivo\\"
 RutaTemp2="Validacion\\Temp\\"
-excel=__file__.rstrip("sincronizar.pyw")+"CUOTA ENERGETICA.xlsm"
+excel= destino + "\\CUOTA ENERGETICA.xlsm"
 excel2="CUOTA ENERGETICA.xlsm"
 complemento="Validacion\\Archivo\\"
 registros=[]
