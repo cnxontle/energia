@@ -7,6 +7,7 @@ import xlwings as xw
 import psutil
 import win32com.client
 
+# Verificar si el excel esta abierto
 def is_excel_open(file_path):
     file_name = os.path.basename(file_path).lower()
     for process in psutil.process_iter(attrs=['pid', 'name']):
@@ -19,6 +20,7 @@ def is_excel_open(file_path):
             pass
     return False
 
+# Cerrar el excel y guardar cambios
 def save_and_close_excel(file_path):
     try:
         excel = win32com.client.Dispatch("Excel.Application")
@@ -30,18 +32,22 @@ def save_and_close_excel(file_path):
     except Exception as e:
         print(f"Error al guardar y cerrar Excel: {str(e)}")
 
+# Actualizar repositorio local omitiendo archivos de configuracion
 def descargar_y_descomprimir_zip(url_zip, destino):
     response = requests.get(url_zip)
     if response.status_code == 200:
         with open("programa_actualizado.zip", "wb") as zip_file:
             zip_file.write(response.content)
         with zipfile.ZipFile("programa_actualizado.zip", "r") as zip_ref:
-            zip_ref.extractall(destino)
+            for file_name in zip_ref.namelist():
+                if not file_name.endswith('.txt'):
+                    zip_ref.extract(file_name, destino)
         os.remove("programa_actualizado.zip")
         print("Programa actualizado correctamente.")
     else:
         print("Error al descargar el archivo ZIP")
 
+# Hacer respaldo de la informacion del excel
 def actualizar_excel(filename,nombre,min):
     wb = openpyxl.load_workbook(filename, data_only=False, keep_vba=True)
     sheet = wb[nombre]
@@ -60,7 +66,7 @@ archivo_xlsm = os.path.join(script_dir, 'CUOTA ENERGETICA.xlsm')
 if is_excel_open(archivo_xlsm):
     save_and_close_excel(archivo_xlsm)
 
-# # obtener el contenido de excel
+# Obtener datos de excel
 contenido_del_dataframe = actualizar_excel(archivo_xlsm,"DATOS",2)
 contenido_del_dataframe2 = actualizar_excel(archivo_xlsm,"bombas",1)
 
@@ -70,14 +76,14 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 destino = os.path.abspath(os.path.join(script_dir, os.pardir))
 descargar_y_descomprimir_zip(url_zip, destino)
 
-# Accede modificar el excel
+# Modificar el nuevo excel
 wb = xw.Book(archivo_xlsm)
 
-# restaurar datos
+# Restaurar datos
 sheet = wb.sheets['DATOS']
 sheet.range('B2').value = contenido_del_dataframe.values
 
-#restaurar bombas
+# Restaurar bombas
 sheet2 = wb.sheets['bombas']
 sheet2.range('a1').value = contenido_del_dataframe2.values
 
