@@ -37,8 +37,9 @@ def actualizar_excel(filename,nombre,min):
 
 # Obtener el directorio del script
 script_dir = os.path.dirname(os.path.abspath(__file__))
-archivo_xlsm = os.path.join(script_dir, 'CUOTA ENERGETICA.xlsm')
-
+destino = os.path.abspath(os.path.join(script_dir, os.pardir))
+destino2 = os.path.abspath(os.path.join(destino, os.pardir))
+archivo_xlsm = os.path.join(destino, 'CUOTA ENERGETICA.xlsm')
 
 # Obtener datos de excel
 contenido_del_dataframe = actualizar_excel(archivo_xlsm,"DATOS",2)
@@ -46,9 +47,6 @@ contenido_del_dataframe2 = actualizar_excel(archivo_xlsm,"bombas",1)
 
 # Reemplazar repositorio
 url_zip = "https://github.com/cnxontle/energia/archive/main.zip"
-script_dir = os.path.dirname(os.path.abspath(__file__))
-destino = os.path.abspath(os.path.join(script_dir, os.pardir))
-destino2 = os.path.abspath(os.path.join(destino, os.pardir))
 descargar_y_descomprimir_zip(url_zip, destino2)
 
 # Modificar el nuevo excel
