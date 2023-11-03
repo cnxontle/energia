@@ -5,6 +5,7 @@ import openpyxl
 import pandas as pd
 import xlwings as xw
 from time import sleep
+import pymsgbox
 
 sleep (3)
 # Actualizar repositorio local omitiendo archivos de configuracion
@@ -62,3 +63,5 @@ sheet2.range('a1').value = contenido_del_dataframe2.values
 
 # Guarda los cambios en el archivo
 wb.save()
+wb.close()
+pymsgbox.alert("Procedimiento Completado!",title='Actualicación del programa')
