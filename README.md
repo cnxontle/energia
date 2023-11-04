@@ -10,19 +10,19 @@ Asegúrate de tener las siguientes bibliotecas instaladas en tu entorno de Pytho
 ```bash
 pip install PyPDF2==1.26.0
 
-pip install pymsgbox
+pip install pymsgbox==1.0.9
 
-pip install path.py
+pip install requests==2.28.2
 
-pip install wheel
+pip installxlwings==0.30.12
 
-pip install openpyxl
+pip install openpyxl==3.1.2
 
-pip install simplekml
+pip install simplekml==1.3.6
 
-pip install pandas
+pip install pandas==1.5.3
 
-pip install xlrd --upgrade
+pip install xlrd==2.0.1
 ```
 
 
