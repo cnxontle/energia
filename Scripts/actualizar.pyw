@@ -16,7 +16,7 @@ def descargar_y_descomprimir_zip(url_zip, destino):
             zip_file.write(response.content)
         with zipfile.ZipFile("programa_actualizado.zip", "r") as zip_ref:
             for file_name in zip_ref.namelist():
-                if not file_name.endswith('.txt'):
+                if not file_name.endswith('.txt') and not file_name.endswith('.md') and not file_name.endswith('.gitignore'):
                     zip_ref.extract(file_name, destino)
         os.remove("programa_actualizado.zip")
         print("Programa actualizado correctamente.")
