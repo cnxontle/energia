@@ -14,7 +14,7 @@ pip install pymsgbox==1.0.9
 
 pip install requests==2.28.2
 
-pip installxlwings==0.30.12
+pip install xlwings==0.30.12
 
 pip install openpyxl==3.1.2
 
