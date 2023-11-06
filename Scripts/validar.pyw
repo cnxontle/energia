@@ -5,11 +5,13 @@ import os
 import pymsgbox
 
 # PARAMETROS
-RutaTemp=__file__.rstrip("validar.pyw")+"Validacion\\Temp\\"
-RutaRespaldo=__file__.rstrip("validar.pyw")+"Validacion\\Respaldo\\"
-RutaErrores=__file__.rstrip("validar.pyw")+"Validacion\\Errores\\"
-RutaMadre=__file__.rstrip("validar.pyw")+"Validacion\\Archivo\\"
-RutaHijo= __file__.rstrip("validar.pyw")+"Validacion\\"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+destino = os.path.abspath(os.path.join(script_dir, os.pardir))
+RutaTemp= destino +"\\Validacion\\Temp\\"
+RutaRespaldo= destino +"\\Validacion\\Respaldo\\"
+RutaErrores= destino +"\\Validacion\\Errores\\"
+RutaMadre= destino +"\\Validacion\\Archivo\\"
+RutaHijo= destino +"\\Validacion\\"
 os.chdir(RutaHijo)
 pdfs_hijo = [archivo for archivo in os.listdir(RutaHijo) if archivo.endswith(".pdf")]
 lista_prefijos = []

@@ -6,10 +6,12 @@ import tkinter as tk
 from tkinter import ttk
 
 # PARAMETROS
-RutaExp = __file__.rstrip("integrar.pyw") + "Validacion\\Archivo\\Expedientes\\"
-RutaHijo = __file__.rstrip("integrar.pyw") + "Validacion\\Archivo\\"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+destino = os.path.abspath(os.path.join(script_dir, os.pardir))
+RutaExp = destino + "\\Validacion\\Archivo\\Expedientes\\"
+RutaHijo = destino + "\\Validacion\\Archivo\\"
 pdfs_hijo = [archivo for archivo in os.listdir(RutaHijo) if archivo.endswith(".pdf")]
-RutaMadre = __file__.rstrip("integrar.pyw")
+RutaMadre = destino + "\\"
 os.chdir(RutaHijo)
 p = 0
 lista_prefijos = []

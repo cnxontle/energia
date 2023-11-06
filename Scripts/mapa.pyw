@@ -30,7 +30,9 @@ def dms_to_decimal(dms):
     return decimal
 
 # Cargar el archivo Excel
-RutaMadre = __file__.rstrip("mapa.pyw")
+script_dir = os.path.dirname(os.path.abspath(__file__))
+destino = os.path.abspath(os.path.join(script_dir, os.pardir))
+RutaMadre = destino + "\\"
 os.chdir(RutaMadre)
 excel_file = RutaMadre + "CUOTA ENERGETICA.xlsm"
 
