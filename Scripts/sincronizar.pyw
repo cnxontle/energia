@@ -200,13 +200,8 @@ for nodo in nodos:
 		#EMITIR DESDE REGISTRO LOCAL
 		try:
 			if master:
-				try:
-					#shutil.copy(excel, Ruta2)		#si soy administrador voy a copiar mi excel en todas partes
-					print (f"excel copiado en nodo {nodo}")
-				except:
-					pass
+				shutil.copy(excel, Ruta2)		#si soy administrador voy a copiar mi excel en todas partes
 
-			proceso_completo = True
 			for i in documentos:
 				try:
 					shutil.copy(RutaMadre+i, Ruta1)
@@ -215,16 +210,12 @@ for nodo in nodos:
 						os.remove(Ruta1+i)
 					except:
 						pass
-
-					
 		except:
 			cadena=",".join(documentos)
 			if cadena != ".pdf":
 				pymsgbox.alert("no se pudo sincronizar en "+n,title='Sincronizar Documentos')
-				f = open (RutaTemp+n+'.txt','a')
-				f.write(cadena+",")
-				f.close()
-
+				with open (RutaTemp+n+'.txt','a') as f:
+					f.write(cadena+",")
 				
 m = open (RutaTemp+'registro.txt','w')
 m.close()
