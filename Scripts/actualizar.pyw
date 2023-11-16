@@ -61,7 +61,7 @@ sheet2 = wb.sheets['bombas']
 sheet2.range('a1').value = contenido_del_dataframe2.values
 
 reinscripcion_sheet = wb.sheets['REINSCRIPCION']
-reinscripcion_sheet.PageSetup.PrintArea = 'D2:S52'
+reinscripcion_sheet.page_setup.PrintArea = 'D2:S52'
 
 # Guarda los cambios en el archivo
 wb.save()
