@@ -50,7 +50,8 @@ url_zip = "https://github.com/cnxontle/energia/archive/main.zip"
 descargar_y_descomprimir_zip(url_zip, destino2)
 
 # Modificar el nuevo excel
-wb = xw.Book(archivo_xlsm)
+app = xw.App(visible=False)
+wb = app.books.open(archivo_xlsm)
 
 # Restaurar datos
 sheet = wb.sheets['DATOS']
@@ -66,4 +67,5 @@ reinscripcion_sheet.api.PageSetup.PrintArea = 'D2:S52'
 # Guarda los cambios en el archivo
 wb.save()
 wb.close()
+app.quit()
 pymsgbox.alert("Procedimiento Completado!",title='Actualicación del programa')
