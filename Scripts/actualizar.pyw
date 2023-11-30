@@ -19,9 +19,9 @@ def descargar_y_descomprimir_zip(url_zip, destino):
                 if not file_name.endswith('.txt') and not file_name.endswith('.md') and not file_name.endswith('.gitignore'):
                     zip_ref.extract(file_name, destino)
         os.remove("programa_actualizado.zip")
-        print("Programa actualizado correctamente.")
     else:
-        print("Error al descargar el archivo ZIP")
+        pymsgbox.alert("Error al descargar y descomprimir el repositorio", title='Error')
+        exit()
 
 # Hacer respaldo de la informacion del excel
 def actualizar_excel(filename,nombre,min):
