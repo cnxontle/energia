@@ -50,18 +50,17 @@ contenido_del_dataframe2 = actualizar_excel(archivo_xlsm,"bombas",1)
 archivo_excel_recuperado = os.path.join(script_dir, 'recuperado.xlsx')
 rec = openpyxl.Workbook()
 
-ws_datos = rec.create_sheet(title="DATOS")
-for row in contenido_del_dataframe.values.tolist():
-    ws_datos.append(row)
-
-# Guardar contenido_del_dataframe2 en la hoja "bombas"
-ws_bombas = rec.create_sheet(title="bombas")
-for row in contenido_del_dataframe2.values.tolist():
-    ws_bombas.append(row)
-
-# Agregar una pestaña adicional "padron cfe" con un DataFrame vacío
+# Crear hojas
 ws_padron_cfe = rec.create_sheet(title="padron cfe")
 ws_padron_cfe = rec.create_sheet(title="REPORTE")
+ws_datos = rec.create_sheet(title="DATOS")
+ws_bombas = rec.create_sheet(title="bombas")
+
+# Escribir respaldo
+rec_sheet = rec.sheets['DATOS']
+rec_sheet.range('a1').value = contenido_del_dataframe.values
+rec_sheet2 = rec.sheets['bombas']
+rec_sheet2.range('a1').value = contenido_del_dataframe2.values
 
 # Guardar el libro de trabajo
 rec.save(archivo_excel_recuperado)
