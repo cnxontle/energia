@@ -2,3 +2,5 @@
 !**/error.pdf
 **/*.kml
 **/~$CUOTA ENERGETICA.xlsm
+**/__pycache__
+**/.pyc

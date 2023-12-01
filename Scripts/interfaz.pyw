@@ -1,0 +1,66 @@
+import tkinter as tk
+from tkinter import ttk
+
+class OpcionesMapa:
+    def __init__(self, master):
+        self.master = master
+        master.title("Opciones del Mapa")
+        master.geometry("327x140+50+50")
+
+        # Lista para almacenar las opciones seleccionadas
+        self.opciones_seleccionadas = []
+
+        # Etiqueta y entrada para Filtrar por Status
+        self.label_status = tk.Label(master, text="1. ¿Deseas filtrar por status?")
+        self.label_status.grid(row=0, column=0, sticky=tk.W, padx=10, pady=5)
+        self.status_var = tk.StringVar(value="Sí")
+        self.status_entry = ttk.Combobox(master, values=["Sí", "No"], textvariable=self.status_var)
+        self.status_entry.grid(row=0, column=1, pady=5, sticky=tk.W)
+
+        # Etiqueta y lista desplegable para Tamaño de la Burbuja
+        self.label_tamano = tk.Label(master, text="2. Tamaño de la burbuja:")
+        self.label_tamano.grid(row=1, column=0, sticky=tk.W, padx=10, pady=5)
+        self.tamano_var = tk.StringVar(value="Estandar")
+        self.tamano_entry = ttk.Combobox(master, values=["Estandar", "Superficie de Riego", "Cuota Energética", "Consumo Anual", "Consumo por Hectarea"], textvariable=self.tamano_var)
+        self.tamano_entry.grid(row=1, column=1, pady=5, sticky=tk.W)
+
+        # Etiqueta y lista desplegable para Colorear por
+        self.label_colorear = tk.Label(master, text="3. Colorear de acuerdo a:")
+        self.label_colorear.grid(row=2, column=0, sticky=tk.W, padx=10, pady=5)
+        self.colorear_var = tk.StringVar(value="Todos Igual")
+        self.colorear_entry = ttk.Combobox(master, values=["Todos Igual", "Tipo de Persona", "Municipio", "Cultivo", "Tipo de Permiso", "Vigencia del Permiso", "Compromiso 1", "Compromiso 2", "Checklist_Solicitud", "Checklist_Curp", "Checklist_Recibo_Luz", "Checklist_Facturas", "Checklist_Escrituras", "Checklist_Croquis", "Checklist_RFC", "Checklist_Biometricos", "Checklist_Verificacion"], textvariable=self.colorear_var)
+        self.colorear_entry.grid(row=2, column=1, pady=5, sticky=tk.W)
+
+        # Botón para aplicar los filtros
+        self.boton_aplicar = tk.Button(master, text="Generar Mapa", command=self.aplicar_filtro)
+        self.boton_aplicar.grid(row=3, column=0, columnspan=2, pady=10)
+
+    def aplicar_filtro(self):
+        # Obtener las opciones seleccionadas
+        status_filtrar = self.status_var.get()
+        tamano_burbuja = self.tamano_var.get()
+        colorear_por = self.colorear_var.get()
+
+        # Almacenar las opciones en la lista
+        self.opciones_seleccionadas = [status_filtrar, tamano_burbuja, colorear_por]
+
+        # Cerrar la ventana después de aplicar el filtro
+        self.master.destroy()
+
+    def iniciar_interfaz(self):
+        # Inicia el bucle de la interfaz gráfica y espera hasta que la ventana sea cerrada
+        self.master.mainloop()
+
+    def get_opciones_seleccionadas(self):
+        return self.opciones_seleccionadas
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = OpcionesMapa(root)
+    app.iniciar_interfaz()
+
+    # Después de cerrar la ventana, puedes obtener las opciones seleccionadas
+    opciones = app.get_opciones_seleccionadas()
+    print(opciones)
+
+

@@ -2,6 +2,8 @@ import simplekml
 import pandas as pd
 import re
 import os
+import interfaz
+import tkinter as tk
 
 def dms_to_decimal(dms):
     # Manejar valores vacíos o nulos
@@ -21,13 +23,18 @@ def dms_to_decimal(dms):
 
     if degrees > 70:
         decimal = -(degrees + minutes / 60 + seconds / 3600)
-
     elif degrees < 0:
         decimal = degrees - minutes / 60 - seconds / 3600
     else:
         decimal = degrees + minutes / 60 + seconds / 3600
-
     return decimal
+
+# Opciones del mapa
+root = tk.Tk()
+app = interfaz.OpcionesMapa(root)
+app.iniciar_interfaz()
+opciones = app.get_opciones_seleccionadas()
+print(opciones)
 
 # Cargar el archivo Excel
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -35,8 +42,6 @@ destino = os.path.abspath(os.path.join(script_dir, os.pardir))
 RutaMadre = destino + "\\"
 os.chdir(RutaMadre)
 excel_file = RutaMadre + "CUOTA ENERGETICA.xlsm"
-
-
 df = pd.read_excel(excel_file)
 
 # Buscar la columna "ESTATUS"
