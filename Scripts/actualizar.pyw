@@ -57,10 +57,10 @@ ws_datos = rec.create_sheet(title="DATOS")
 ws_bombas = rec.create_sheet(title="bombas")
 
 # Escribir respaldo
-rec_sheet = rec.sheets['DATOS']
-rec_sheet.range('a1').value = contenido_del_dataframe.values
-rec_sheet2 = rec.sheets['bombas']
-rec_sheet2.range('a1').value = contenido_del_dataframe2.values
+for row in contenido_del_dataframe.values.tolist():
+    ws_datos.append(row)
+for row in contenido_del_dataframe2.values.tolist():
+    ws_bombas.append(row)
 
 # Guardar el libro de trabajo
 rec.save(archivo_excel_recuperado)
