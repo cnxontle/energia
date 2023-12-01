@@ -9,7 +9,7 @@ import pymsgbox
 
 sleep (3)
 # Actualizar repositorio local omitiendo archivos de configuracion
-def descargar_y_descomprimir_zip(url_zip, destino):
+def descargar_y_descomprimir_zip(url_zip, destino, rec):
     response = requests.get(url_zip)
     if response.status_code == 200:
         with open("programa_actualizado.zip", "wb") as zip_file:
@@ -21,6 +21,7 @@ def descargar_y_descomprimir_zip(url_zip, destino):
         os.remove("programa_actualizado.zip")
     else:
         pymsgbox.alert("Error al descargar y descomprimir el repositorio", title='Error')
+        os.remove(rec)
         exit()
 
 # Hacer respaldo de la informacion del excel
@@ -45,9 +46,30 @@ archivo_xlsm = os.path.join(destino, 'CUOTA ENERGETICA.xlsm')
 contenido_del_dataframe = actualizar_excel(archivo_xlsm,"DATOS",2)
 contenido_del_dataframe2 = actualizar_excel(archivo_xlsm,"bombas",1)
 
+# Crear un archivo Excel "recuperado.xlsx"
+archivo_excel_recuperado = os.path.join(script_dir, 'recuperado.xlsx')
+rec = openpyxl.Workbook()
+
+ws_datos = rec.create_sheet(title="DATOS")
+for row in contenido_del_dataframe.values.tolist():
+    ws_datos.append(row)
+
+# Guardar contenido_del_dataframe2 en la hoja "bombas"
+ws_bombas = rec.create_sheet(title="bombas")
+for row in contenido_del_dataframe2.values.tolist():
+    ws_bombas.append(row)
+
+# Agregar una pestaña adicional "padron cfe" con un DataFrame vacío
+ws_padron_cfe = rec.create_sheet(title="padron cfe")
+ws_padron_cfe = rec.create_sheet(title="REPORTE")
+
+# Guardar el libro de trabajo
+rec.save(archivo_excel_recuperado)
+rec.close()
+
 # Reemplazar repositorio
 url_zip = "https://github.com/cnxontle/energia/archive/main.zip"
-descargar_y_descomprimir_zip(url_zip, destino2)
+descargar_y_descomprimir_zip(url_zip, destino2, archivo_excel_recuperado)
 
 # Modificar el nuevo excel
 app = xw.App(visible=False)
@@ -68,4 +90,8 @@ reinscripcion_sheet.api.PageSetup.PrintArea = 'D2:S52'
 wb.save()
 wb.close()
 app.quit()
+
+# eliminar el archivo recuperado
+os.remove(archivo_excel_recuperado)
+
 pymsgbox.alert("Procedimiento Completado!",title='Actualicación del programa')
