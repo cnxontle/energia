@@ -11,7 +11,7 @@ class OpcionesMapa:
         self.opciones_seleccionadas = []
         self.directorio_iconos = ['http://maps.google.com/mapfiles/kml/shapes/shaded_dot.png','http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png','http://maps.google.com/mapfiles/kml/shapes/open-diamond.png','http://maps.google.com/mapfiles/kml/shapes/donut.png','http://maps.google.com/mapfiles/kml/shapes/polygon.png','http://maps.google.com/mapfiles/kml/shapes/triangle.png']
         self.columnas_tamano = ["", "SUPERFICIE DE RIEGO", "CUOTA ENERGETICA CALCULADA", "CONSUMO ANUAL", "kWh POR HECTAREA"]
-        self.columnas_color = ["", "TIPO DE PERSONA", "MUNICIPIO", "CULTIVO", "TIPO DE DOCUMENTO QUE ACREDITA EL USO Y APROVECHAMIENTO DE AGUA", "ESTADO DEL PERMISO", "COMPROMISO 1", "COMPROMISO 2", "SOLICITUD", "CURP", "RECIBO LUZ", "FACTURAS", "ESCRITURAS", "CROQUIS", "RFC", "BIOMETRICOS", "VERIFICACION"]
+        self.columnas_color = ["", "TIPO DE PERSONA", "MUNICIPIO", "CULTIVO", "TIPO DE DOCUMENTO QUE ACREDITA EL USO Y APROVECHAMIENTO DE AGUA", "ESTADO DEL PERMISO", "COMPROMISO 1", "COMPROMISO 2", "SOLICITUD", "CURP ", "RECIBO LUZ", "FACTURAS", "ESCRITURAS", "CROQUIS", "RFC ", "BIOMETRICOS", "VERIFICACION"]
         
         self.opciones_icono = ["Punto", "Circulo", "Diamante", "Dona", "Poligono", "Triangulo"]
         self.opciones_tamano = ["Estandar", "Superficie de Riego", "Cuota Energética", "Consumo Anual", "Consumo por Hectarea"]
@@ -62,7 +62,7 @@ class OpcionesMapa:
         colorear_por_valor = self.columnas_color[self.opciones_color.index(colorear_por)]
 
         # Almacenar las opciones en la lista
-        self.opciones_seleccionadas = [status_filtrar, icono_valor, tamano_burbuja_valor, colorear_por_valor]
+        self.opciones_seleccionadas = [status_filtrar, icono_valor, tamano_burbuja_valor, colorear_por_valor,tamano_burbuja,colorear_por]
 
         # Cerrar la ventana después de aplicar el filtro
         self.master.destroy()
