@@ -91,8 +91,12 @@ if opciones != []:
         min_tamano = 1
         max_tamano = 2
     else:
-        min_tamano = df[tamano_burbuja_valor].min()
-        max_tamano = df[tamano_burbuja_valor].max()
+        try:
+            min_tamano = df[tamano_burbuja_valor].min()
+            max_tamano = df[tamano_burbuja_valor].max()
+        except:
+            pymsgbox.alert(f"Se encontró un error en los valores de la columna: '{tamano_burbuja_valor}'", "Error")
+            exit()
 
     # Crear un objeto KML
     kml = simplekml.Kml()
