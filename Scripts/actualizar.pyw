@@ -30,7 +30,7 @@ def actualizar_excel(filename,nombre,min):
     sheet = wb[nombre]
     max_row = sheet.max_row
     contenido_columnas = []
-    for row in sheet.iter_rows(min_row=min, max_row=max_row, min_col=min, max_col=54):  # Columnas B a BB
+    for row in sheet.iter_rows(min_row=min, max_row=max_row, min_col=min, max_col=59):  # Columnas B a BG
         fila = [cell.value for cell in row]
         contenido_columnas.append(fila)
     df = pd.DataFrame(contenido_columnas)
@@ -44,7 +44,6 @@ archivo_xlsm = os.path.join(destino, 'CUOTA ENERGETICA.xlsm')
 
 # Obtener datos de excel
 contenido_del_dataframe = actualizar_excel(archivo_xlsm,"DATOS",2)
-contenido_del_dataframe2 = actualizar_excel(archivo_xlsm,"bombas",1)
 
 # Crear un archivo Excel "recuperado.xlsx"
 archivo_excel_recuperado = os.path.join(script_dir, 'recuperado.xlsx')
@@ -54,13 +53,10 @@ rec = openpyxl.Workbook()
 ws_padron_cfe = rec.create_sheet(title="padron cfe")
 ws_padron_cfe = rec.create_sheet(title="REPORTE")
 ws_datos = rec.create_sheet(title="DATOS")
-ws_bombas = rec.create_sheet(title="bombas")
 
 # Escribir respaldo
 for row in contenido_del_dataframe.values.tolist():
     ws_datos.append(row)
-for row in contenido_del_dataframe2.values.tolist():
-    ws_bombas.append(row)
 
 # Guardar el libro de trabajo
 rec.save(archivo_excel_recuperado)
@@ -77,13 +73,6 @@ wb = app.books.open(archivo_xlsm)
 # Restaurar datos
 sheet = wb.sheets['DATOS']
 sheet.range('B2').value = contenido_del_dataframe.values
-
-# Restaurar bombas
-sheet2 = wb.sheets['bombas']
-sheet2.range('a1').value = contenido_del_dataframe2.values
-
-reinscripcion_sheet = wb.sheets['REINSCRIPCION']
-reinscripcion_sheet.api.PageSetup.PrintArea = 'D2:S52'
 
 # Guarda los cambios en el archivo
 wb.save()

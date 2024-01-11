@@ -10,12 +10,12 @@ class OpcionesMapa:
         # Lista para almacenar las opciones seleccionadas
         self.opciones_seleccionadas = []
         self.directorio_iconos = ['http://maps.google.com/mapfiles/kml/shapes/shaded_dot.png','http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png','http://maps.google.com/mapfiles/kml/shapes/open-diamond.png','http://maps.google.com/mapfiles/kml/shapes/donut.png','http://maps.google.com/mapfiles/kml/shapes/polygon.png','http://maps.google.com/mapfiles/kml/shapes/triangle.png']
-        self.columnas_tamano = ["", "SUPERFICIE DE RIEGO", "CUOTA ENERGETICA CALCULADA", "CONSUMO ANUAL", "kWh POR HECTAREA"]
-        self.columnas_color = ["", "TIPO DE PERSONA", "MUNICIPIO", "CULTIVO", "TIPO DE DOCUMENTO QUE ACREDITA EL USO Y APROVECHAMIENTO DE AGUA", "ESTADO DEL PERMISO", "COMPROMISO 1", "COMPROMISO 2", "SOLICITUD", "CURP ", "RECIBO LUZ", "FACTURAS", "ESCRITURAS", "CROQUIS", "RFC ", "BIOMETRICOS", "VERIFICACION"]
+        self.columnas_tamano = ["", "SUPERFICIE DE RIEGO", "CUOTA ENERGETICA CALCULADA", "APROVECHAMIENTO DE LA CUOTA", "CONSUMO ANUAL", "kWh POR HECTAREA", "VOLUMEN CONCECIONADO", "CONSUMO ENERGETICO ENTRE VOLUMEN"]
+        self.columnas_color = ["", "TIPO DE PERSONA", "MUNICIPIO", "CULTIVO", "SISTEMA DE RIEGO", "TIPO DE DOCUMENTO QUE ACREDITA EL USO Y APROVECHAMIENTO DE AGUA", "ESTADO DEL PERMISO", "COMPROMISO 1", "COMPROMISO 2", "SOLICITUD", "CURP ", "RECIBO LUZ", "FACTURAS", "ESCRITURAS", "CROQUIS", "RFC ", "BIOMETRICOS", "VERIFICACION"]
         
         self.opciones_icono = ["Punto", "Circulo", "Diamante", "Dona", "Poligono", "Triangulo"]
-        self.opciones_tamano = ["Estandar", "Superficie de Riego", "Cuota Energética", "Consumo Anual", "Consumo por Hectarea"]
-        self.opciones_color = ["Todos Igual", "Tipo de Persona", "Municipio", "Cultivo", "Tipo de Permiso", "Vigencia del Permiso", "Compromiso 1", "Compromiso 2", "Checklist_Solicitud", "Checklist_Curp", "Checklist_Recibo_Luz", "Checklist_Facturas", "Checklist_Escrituras", "Checklist_Croquis", "Checklist_RFC", "Checklist_Biometricos", "Checklist_Verificacion"]
+        self.opciones_tamano = ["Estandar", "Superficie de Riego", "Cuota Energética", "Aprovechamiento", "Consumo Anual", "Consumo por Hectarea", "Volumen Concesionado", "Consumo entre Volumen"]
+        self.opciones_color = ["Todos Igual", "Tipo de Persona", "Municipio", "Cultivo", "Sistema de Riego", "Tipo de Permiso", "Vigencia del Permiso", "Compromiso 1", "Compromiso 2", "Checklist_Solicitud", "Checklist_Curp", "Checklist_Recibo_Luz", "Checklist_Facturas", "Checklist_Escrituras", "Checklist_Croquis", "Checklist_RFC", "Checklist_Biometricos", "Checklist_Verificacion"]
 
         # Etiqueta y entrada para Filtrar por Status
         self.label_status = tk.Label(master, text="1. ¿Deseas filtrar por status?")

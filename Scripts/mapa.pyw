@@ -68,6 +68,12 @@ if opciones != []:
         medida = 'kWh'
     elif tamano_burbuja_valor == 'kWh POR HECTAREA':
         medida = 'kWh/ha'
+    elif tamano_burbuja_valor == 'VOLUMEN CONCECIONADO':
+        medida = 'm3'
+    elif tamano_burbuja_valor == 'CONSUMO ENERGETICO ENTRE VOLUMEN':
+        medida = 'kWh/m3'
+    elif tamano_burbuja_valor == 'APROVECHAMIENTO DE LA CUOTA':
+        medida = ''
     else:
         medida = ''
 
@@ -197,10 +203,21 @@ if opciones != []:
                 except:
                     punto.extendeddata.newdata("CUOTA_ENERGETICA",  cuota_energetica)
                 if tamano_burbuja_valor not in leyenda and tamano_burbuja_valor != '':
-                    try:
-                        punto.extendeddata.newdata(opciones[4].upper(),  f'{int(leyenda1)} {medida}')
-                    except:
-                        punto.extendeddata.newdata(opciones[4].upper(), leyenda1)
+                    if tamano_burbuja_valor == "APROVECHAMIENTO DE LA CUOTA" or tamano_burbuja_valor == "CONSUMO ENERGETICO ENTRE VOLUMEN":
+                        try: 
+                            if tamano_burbuja_valor == "APROVECHAMIENTO DE LA CUOTA":
+                                resultado_formateado = "{:.2f}".format(float(leyenda1) * 100)
+                                punto.extendeddata.newdata(opciones[4].upper(),  f'{resultado_formateado} %')
+                            else:
+                                resultado_formateado = "{:.2f}".format(float(leyenda1))
+                                punto.extendeddata.newdata(opciones[4].upper(),  f'{resultado_formateado} kWh/m3')
+                        except: 
+                            punto.extendeddata.newdata(opciones[4].upper(), leyenda1)
+                    else:
+                        try:
+                            punto.extendeddata.newdata(opciones[4].upper(),  f'{int(leyenda1)} {medida}')
+                        except:
+                            punto.extendeddata.newdata(opciones[4].upper(), leyenda1)
                 if colorear_por_valor not in leyenda and colorear_por_valor != '':
                     punto.extendeddata.newdata(opciones[5].upper(), leyenda2)
                 punto.style.iconstyle.icon.href = icono_valor
