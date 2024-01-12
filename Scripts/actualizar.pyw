@@ -67,7 +67,7 @@ url_zip = "https://github.com/cnxontle/energia/archive/main.zip"
 descargar_y_descomprimir_zip(url_zip, destino2, archivo_excel_recuperado)
 
 # Modificar el nuevo excel
-app = xw.App(visible=False, add_book=False)
+app = xw.App(visible=False)
 wb = app.books.open(archivo_xlsm)
 
 # Restaurar datos
