@@ -41,6 +41,20 @@ df['RPU'] = df['RPU'].str.replace('.0', '')
 df['NUMERO DE FOLIO DEL DOCUMENTO PRESENTADO'] = df['NUMERO DE FOLIO DEL DOCUMENTO PRESENTADO'].astype(str)
 df['FECHA DE SOLICITUD'] = pd.to_datetime(df['FECHA DE SOLICITUD'], errors='coerce')
 df['FECHA DE SOLICITUD'] = df['FECHA DE SOLICITUD'].dt.strftime('%d/%m/%Y')
+
+# Convertir a string
+df['MUNICIPIO'] = df['MUNICIPIO'].astype(str)
+df['LOCALIDAD'] = df['LOCALIDAD'].astype(str)
+df['NOMBRE'] = df['NOMBRE'].astype(str)
+df['CURP'] = df['CURP'].astype(str)
+df['RFC'] = df['RFC'].astype(str)
+df['TIPO DE PERSONA'] = df['TIPO DE PERSONA'].astype(str)
+df['NO. DE CUENTA'] = df['NO. DE CUENTA'].astype(str)
+df['RMU'] = df['RMU'].astype(str)
+df['CULTIVO'] = df['CULTIVO'].astype(str)
+df['CLAVE DE REGISTRO (PEUA)'] = df['CLAVE DE REGISTRO (PEUA)'].astype(str)
+
+# Convertir a mayusculas
 df['MUNICIPIO'] = df['MUNICIPIO'].str.upper()
 df['LOCALIDAD'] = df['LOCALIDAD'].str.upper()
 df['NOMBRE'] = df['NOMBRE'].str.upper()
@@ -50,6 +64,7 @@ df['TIPO DE PERSONA'] = df['TIPO DE PERSONA'].str.upper()
 df['NO. DE CUENTA'] = df['NO. DE CUENTA'].str.upper()
 df['RMU'] = df['RMU'].str.upper()
 df['CULTIVO'] = df['CULTIVO'].str.upper()
+df['CLAVE DE REGISTRO (PEUA)'] = df['CLAVE DE REGISTRO (PEUA)'].str.upper()
 
 # Obtener la fecha actual en formato YYYYMMDD_HHMMSS
 fecha_actual = datetime.now().strftime("%d_%m_%Y")
