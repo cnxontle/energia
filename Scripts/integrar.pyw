@@ -21,6 +21,10 @@ titulos = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "x"]
 nombres_titulos = ["Actualizacion", "Biometricos", "PEUA", "Verificacion", "Identificacion", "CURP", "RFC",
 				   "Recibo CFE", "Facturas", "Titulo CNA", "Acta Constututiva", "Carta Poder", "Escrituras", "Croquis"]
 
+# Borramos los archivos de la carpeta de expedientes
+for archivo in os.listdir(RutaExp):
+	os.remove(RutaExp + archivo)
+
 #FUNCION PARA EXTRAER titulos Y REEMPAZAR POR nombre_titulos
 def agregar_bookmark(fusionador, pdf, p, num_pages, titulos, nombres_titulos):
     titulo = str(pdf[4])
