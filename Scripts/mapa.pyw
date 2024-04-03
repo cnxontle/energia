@@ -64,11 +64,13 @@ if opciones != []:
         medida = 'ha'
     elif tamano_burbuja_valor == 'CUOTA ENERGETICA':
         medida = 'kWh'
-    elif tamano_burbuja_valor == 'CONSUMO ANUAL':
+    elif tamano_burbuja_valor == 'CONSUMO ANUAL KWH':
         medida = 'kWh'
     elif tamano_burbuja_valor == 'kWh POR HECTAREA':
         medida = 'kWh/ha'
     elif tamano_burbuja_valor == 'VOLUMEN CONCECIONADO':
+        medida = 'm3'
+    elif tamano_burbuja_valor == 'GASTO ANUAL M3':
         medida = 'm3'
     elif tamano_burbuja_valor == 'CONSUMO ENERGETICO ENTRE VOLUMEN':
         medida = 'kWh/m3'

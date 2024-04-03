@@ -30,7 +30,7 @@ def actualizar_excel(filename,nombre,min):
     sheet = wb[nombre]
     max_row = sheet.max_row
     contenido_columnas = []
-    for row in sheet.iter_rows(min_row=min, max_row=max_row, min_col=min, max_col=59):  # Columnas B a BG
+    for row in sheet.iter_rows(min_row=min, max_row=max_row, min_col=min, max_col=60):  # Columnas B a BH
         fila = [cell.value for cell in row]
         contenido_columnas.append(fila)
     df = pd.DataFrame(contenido_columnas)
