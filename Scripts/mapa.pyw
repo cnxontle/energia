@@ -231,7 +231,8 @@ if opciones != []:
     nombre1 = opciones[4].lower()
     nombre2 = opciones[5].lower()
     kml_file = f'mapa_{nombre1}_{nombre2}.kml'
-    kml.save(kml_file)
+    kml_path = os.path.join("Mapas", kml_file)
+    kml.save(kml_path)
 
     # Mostrar mensaje de finalización
     mensaje = "Procedimiento Completado!\n\n"
