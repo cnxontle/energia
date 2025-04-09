@@ -20,7 +20,7 @@ pip install openpyxl==3.1.2
 
 pip install simplekml==1.3.6
 
-pip install pandas==1.5.3
+pip install pandas==2.2.2
 
 pip install xlrd==2.0.1
 ```
