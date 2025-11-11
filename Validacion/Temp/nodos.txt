@@ -1,0 +1,4 @@
+nodo1,self
+nodo2,\\139-2TCT673\Users\Public\Documents\energia-main\
+nodo3,\\139-502V74\Users\Administrador\Desktop\ENERGIA\
+nodo4,\\139-3ZP81L1\Users\fernando.medrano\Desktop\ENERGIA\
