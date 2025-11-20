@@ -29,8 +29,8 @@ filtrar_filas('ESTADO DEL PERMISO','VIGENTE')
 columnas_objetivo = ['MUNICIPIO', 'LOCALIDAD', 'CLAVE DE REGISTRO (PEUA)', 'NOMBRE', 'CURP', 'RFC', 'TIPO DE PERSONA',
                       'RPU', 'NO. DE CUENTA', 'RMU', 'TIPO DE DOCUMENTO QUE ACREDITA EL USO Y APROVECHAMIENTO DE AGUA',
                       'NUMERO DE FOLIO DEL DOCUMENTO PRESENTADO', 'VIGENCIA DEL TITULO DE CONCESION  (dd/mm/aaaa)',
-                      'LATITUD', 'LONGITUD', 'HP DEL EQUIPO REGISTRADO', 'CUOTA ENERGETICA CALCULADA', 'SUPERFICIE DE RIEGO',
-                      'CULTIVO','FECHA DE SOLICITUD']
+                      'LATITUD', 'LONGITUD', 'HP DEL EQUIPO REGISTRADO', 'CUOTA ENERGETICA CALCULADA', 'SUP BENEFICIADA',
+                      'CULTIVO', 'RENDIMIENTO ANTERIOR (TON/HA)', 'FECHA DE ACTUALIZACION', 'TELEFONO', 'CORREO ELECTRONICO']
 
 # Crear un nuevo DataFrame con las columnas objetivo
 df = df[columnas_objetivo]
@@ -39,8 +39,12 @@ df = df[columnas_objetivo]
 df['RPU'] = df['RPU'].astype(str)
 df['RPU'] = df['RPU'].str.replace('.0', '')
 df['NUMERO DE FOLIO DEL DOCUMENTO PRESENTADO'] = df['NUMERO DE FOLIO DEL DOCUMENTO PRESENTADO'].astype(str)
-df['FECHA DE SOLICITUD'] = pd.to_datetime(df['FECHA DE SOLICITUD'], errors='coerce')
+df['FECHA DE SOLICITUD'] = pd.to_datetime(df['FECHA DE ACTUALIZACION'], errors='coerce')
 df['FECHA DE SOLICITUD'] = df['FECHA DE SOLICITUD'].dt.strftime('%d/%m/%Y')
+
+
+# eliminar colimna "fecha de solicitud"
+df = df.drop(columns=['FECHA DE SOLICITUD'])
 
 # Convertir a string
 df['MUNICIPIO'] = df['MUNICIPIO'].astype(str)
