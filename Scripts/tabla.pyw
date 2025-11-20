@@ -44,7 +44,7 @@ df['FECHA DE SOLICITUD'] = df['FECHA DE SOLICITUD'].dt.strftime('%d/%m/%Y')
 
 
 # eliminar colimna "fecha de solicitud"
-df = df.drop(columns=['FECHA DE SOLICITUD'])
+df = df.drop(columns=['FECHA DE ACTUALIZACION'])
 
 # Convertir a string
 df['MUNICIPIO'] = df['MUNICIPIO'].astype(str)
